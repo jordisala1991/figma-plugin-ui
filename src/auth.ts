@@ -1,7 +1,14 @@
-import NextAuth from "next-auth"
-import { Provider } from "next-auth/providers";
- 
-const figmaProvider: Provider = {
+import { AuthOptions } from 'next-auth'
+import { OAuthConfig } from 'next-auth/providers/oauth'
+
+type FigmaProfile = {
+  id: string
+  handle: string
+  email: string
+  img_url: string
+}
+
+const figma: OAuthConfig<FigmaProfile> = {
   id: "figma",
   name: "Figma",
   type: "oauth",
@@ -15,8 +22,7 @@ const figmaProvider: Provider = {
   },
   token: {
     url: "https://www.figma.com/api/oauth/token",
-    async request(context: any) {
-      console.log('asda')
+    async request(context) {
       const provider = context.provider;
       const res = await fetch(
         `https://www.figma.com/api/oauth/token?client_id=${provider.clientId}&client_secret=${provider.clientSecret}&redirect_uri=${provider.callbackUrl}&code=${context.params.code}&grant_type=authorization_code`,
@@ -25,9 +31,6 @@ const figmaProvider: Provider = {
       const json = await res.json();
       return { tokens: json };
     },
-  },
-  options: {
-    debug: true,
   },
   userinfo: "https://api.figma.com/v1/me",
   profile(profile) {
@@ -42,6 +45,6 @@ const figmaProvider: Provider = {
   clientSecret: process.env.FIGMA_SECRET,
 };
 
-export const { handlers, signIn, signOut, auth } = NextAuth({
-  providers: [figmaProvider],
-})
+export const authOptions: AuthOptions = {
+  providers: [figma],
+}
