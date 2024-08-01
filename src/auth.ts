@@ -10,6 +10,7 @@ const figmaProvider: Provider = {
     params: {
       scope: "file_read",
       response_type: "code",
+      state: 'state',
     },
   },
   token: {
