@@ -46,5 +46,6 @@ const figma: OAuthConfig<FigmaProfile> = {
 };
 
 export const authOptions: AuthOptions = {
+  secret: process.env.AUTH_SECRET,
   providers: [figma],
 }
