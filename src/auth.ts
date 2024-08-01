@@ -14,7 +14,6 @@ const figmaProvider: Provider = {
   },
   token: {
     url: "https://www.figma.com/api/oauth/token",
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     async request(context: any) {
       const provider = context.provider;
       const res = await fetch(
