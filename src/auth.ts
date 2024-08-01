@@ -22,6 +22,7 @@ const figmaProvider: Provider = {
         { method: "POST" }
       );
       const json = await res.json();
+      console.log(json);
       return { tokens: json };
     },
   },
