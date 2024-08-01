@@ -26,6 +26,9 @@ const figmaProvider: Provider = {
       return { tokens: json };
     },
   },
+  options: {
+    debug: true,
+  },
   userinfo: "https://api.figma.com/v1/me",
   profile(profile) {
     return {

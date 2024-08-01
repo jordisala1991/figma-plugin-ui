@@ -5,7 +5,7 @@ export function SignIn() {
     <form
       action={async () => {
         "use server"
-        await signIn("figma")
+        await signIn("figma", { debug: true})
       }}
     >
       <button type="submit">Signin with Figma</button>
