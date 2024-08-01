@@ -1,15 +1,23 @@
 'use client'
 
-import { signIn } from 'next-auth/react'
+import { useSession, signIn, signOut } from "next-auth/react"
 
-export function SignIn() {
+export default function SignIn() {
+  const { data: session } = useSession()
+  
+  if (session) {
+    return (
+      <>
+        Signed in as {session.user?.email} <br />
+        <button onClick={() => signOut()}>Sign out</button>
+      </>
+    )
+  }
+  
   return (
-    <form
-      onSubmit={async () => {
-        await signIn("figma")
-      }}
-    >
-      <button type="submit">Signin with Figma</button>
-    </form>
+    <>
+      Not signed in <br />
+      <button onClick={() => signIn()}>Sign in</button>
+    </>
   )
 }
