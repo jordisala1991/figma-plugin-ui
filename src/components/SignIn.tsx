@@ -1,11 +1,10 @@
-import { signIn } from "@/auth"
- 
+import { signIn } from 'next-auth/react'
+
 export function SignIn() {
   return (
     <form
-      action={async () => {
-        "use server"
-        await signIn("figma", { debug: true})
+      onSubmit={async () => {
+        await signIn("figma")
       }}
     >
       <button type="submit">Signin with Figma</button>
