@@ -19,7 +19,7 @@ const figmaProvider: Provider = {
       const provider = context.provider;
       const res = await fetch(
         `https://www.figma.com/api/oauth/token?client_id=${provider.clientId}&client_secret=${provider.clientSecret}&redirect_uri=${provider.callbackUrl}&code=${context.params.code}&grant_type=authorization_code`,
-        { method: "POST" }
+        { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" } }
       );
       const json = await res.json();
       console.log(json);
